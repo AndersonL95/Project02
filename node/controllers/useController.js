@@ -104,7 +104,7 @@ const useController ={
                 maxAge: 7*24*60*1000
             })
 
-            //res.json({projectToken})
+            res.json({projectToken})
 
         } catch (err) {
             return res.status(500).json({message: err.message});
@@ -386,6 +386,17 @@ const useController ={
        }
     },
     getUser: async (req, res) => {
+        try {
+            const admins = await Users.findById({cargo: 'admin'}).select('-password');
+            if(!admins) return res.status(400).json({message: "Usuario não existe!"});
+
+            res.json(user)
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({message: err.message});
+        }
+    },
+    getAdmin: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password');
             if(!user) return res.status(400).json({message: "Usuario não existe!"});

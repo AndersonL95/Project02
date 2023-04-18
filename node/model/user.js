@@ -16,8 +16,9 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     cargo: {
-        type: Number,
-        default: 0
+        type: String,
+        enum:['user', 'admin'],
+        default: 'user'
     },
     picture: {
         type: String,
@@ -27,5 +28,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true
    }
-})
+},
+{timestamps: true}
+)
 module.exports = mongoose.model('Users', userSchema);

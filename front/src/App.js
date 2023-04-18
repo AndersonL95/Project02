@@ -1,20 +1,16 @@
 import './App.css';
-import {Provider} from 'react-redux';
-import Store from './store';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Home from './views/home';
-import NavBar from './views/NavBar'
-
+import {BrowserRouter, Route, Router, Routes} from 'react-router-dom'
+import NavBar from './components/header/NavBar';
+import MainPages from './components/mainPages/Pages';
+import { DataProvider } from './GlobalState';
 function App() {
   return ( 
-    <Provider store={Store}>
-        <NavBar />
-        <Router>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-        </Routes>
-        </Router>
-    </Provider>
+    <DataProvider>
+        <BrowserRouter>
+        <NavBar/>
+          <MainPages/>
+        </BrowserRouter>
+    </DataProvider>
   );
 }
 

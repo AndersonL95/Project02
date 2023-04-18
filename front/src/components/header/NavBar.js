@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import AppBar from '../components/appBar';
-import Toolbar from '../components/toolBar';
+import AppBar from '../componentAssets/appBar';
+import Toolbar from '../componentAssets/toolBar';
 
 const rightLink = {
   fontSize: 16,
@@ -30,15 +30,15 @@ export default function NavBar() {
               color="inherit"
               variant="h6"
               underline="none"
-              href="/premium-themes/onepirate/sign-in/"
+              href="/login"
               sx={rightLink}
             >
-              {'Sign In'}
+              {'Login'}
             </Link>
             <Link
               variant="h6"
               underline="none"
-              href="/premium-themes/onepirate/sign-up/"
+              href="/"
               sx={{ ...rightLink, color: 'secondary.main' }}
             >
               {'Sign Up'}

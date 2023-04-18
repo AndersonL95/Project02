@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Button from '../components/buttons';
-import Typography from '../components/typography';
-import ProductHeroLayout from './homeMain';
+import Button from '../../componentAssets/buttons';
+import Typography from '../../componentAssets/typography';
+import ProductHeroLayout from '../../componentAssets/homeMain';
 
 const backgroundImage =
   'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400';
