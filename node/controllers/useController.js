@@ -8,6 +8,8 @@ const {body, validationResult} = require('express-validator');
 const {v4: uuidv4} = require('uuid');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const fs = require('fs');
+
 
 let transporter = nodemailer.createTransport({
     service: 'outlook',
@@ -78,7 +80,12 @@ const useController ={
     register: async (req, res) => {
         try {
             const {name, email, password, verified} = req.body;
-            const {picture} = req.file.path
+             
+                const picture ={
+                    data: fs.readFileSync(path.join(__dirname, "..", '/picture/users/' + req.file.filename)),
+                    contentType: 'image/png'
+                }
+            
 
             const user = await Users.findOne({email})
             if(user) return res.status(400).json({message: "Esse email já existe."})
@@ -88,7 +95,7 @@ const useController ={
 
             const passwordHash = await bcrypt.hash(password, 10);
             const newUser = new Users({
-                name: req.body.name, email: req.body.email, picture: req.file.path,verified: false, password: passwordHash
+                name, email, picture,verified: false, password: passwordHash
             });
             await newUser.save()
                 .then((result) =>{
@@ -104,7 +111,7 @@ const useController ={
                 maxAge: 7*24*60*1000
             })
 
-            res.json({projectToken})
+            //res.json({projectToken})
 
         } catch (err) {
             return res.status(500).json({message: err.message});
@@ -189,18 +196,17 @@ const useController ={
         try {
             const {email, password} = req.body;
     
-       const user = await  Users.find({email})
-             .then((data) => {
-                     
-                if(data.length) {
-                    if(!data[0].verified) {
+            const user = await Users.find({email})
+            if(!user) return res.status(400).json({message: "Usuario não existe!"});
+                if(user.length) {
+                    if(!user[0].verified) {
                         return res.status(400).json({message: "O e-mail ainda não foi verificado. Verifique sua caixa de entrada."})
                     } else {
-                        const isMatch =  bcrypt.compare(password, data[0].password);
+                        const isMatch =  bcrypt.compare(password, user[0].password);
                         if(!isMatch) return res.status(400).json({message: "Senha incorreta."});
         
-                        const projectToken = createAccessToken({id: data[0]._id});
-                        const refreshToken = createRefreshToken({id: data[0]._id});
+                        const projectToken = createAccessToken({id: user[0]._id});
+                        const refreshToken = createRefreshToken({id: user[0]._id});
         
                         res.cookie('refreshToken', refreshToken, {
                             httpOnly: true,
@@ -209,10 +215,11 @@ const useController ={
                         })
                         res.json({projectToken});
                     }
-                }
+                   
                     
-             })
-             if(!user) return res.status(400).json({message: "Usuario não existe!"});
+                }
+                 if(!user) return res.status(400).json({message: "Usuario não existe!"});
+             
      
         } catch (err) {
             console.log(err);
@@ -386,17 +393,6 @@ const useController ={
        }
     },
     getUser: async (req, res) => {
-        try {
-            const admins = await Users.findById({cargo: 'admin'}).select('-password');
-            if(!admins) return res.status(400).json({message: "Usuario não existe!"});
-
-            res.json(user)
-        } catch (err) {
-            console.log(err);
-            return res.status(500).json({message: err.message});
-        }
-    },
-    getAdmin: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password');
             if(!user) return res.status(400).json({message: "Usuario não existe!"});

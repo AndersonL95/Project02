@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,18 +18,21 @@ const userSchema = new mongoose.Schema({
     },
     cargo: {
         type: String,
-        enum:['user', 'admin'],
-        default: 'user'
+        default: 'user',
+        enum:["user", "admin"],
+        
     },
     picture: {
-        type: String,
-        required: true
+        data: Buffer,
+        contentType: String,
+    
+        
    },
    verified: {
     type: Boolean,
     required: true
    }
 },
-{timestamps: true}
+
 )
 module.exports = mongoose.model('Users', userSchema);

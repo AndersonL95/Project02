@@ -11,8 +11,8 @@ export const DataProvider = ({children}) =>{
         const AccessToken = localStorage.getItem('AccessToken');
         if(AccessToken){
             const refreshToken = async () =>{
-                const refresh = await axios.get('/user/refresh_token');
-                setToken(refresh.data.accessToken)
+                const refresh = await axios.get('user/refresh_token');
+                setToken(refresh.data.projectToken)
                 setTimeout(() =>{
                     refreshToken()
                 },
@@ -23,7 +23,7 @@ export const DataProvider = ({children}) =>{
     },[])
     const state = {
         token: [token, setToken],
-        userApi: UserApi(token)
+        userApi: UserApi(token),
     }
     return (
         <GlobalState.Provider value={state}>

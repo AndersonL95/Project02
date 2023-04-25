@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 function UserApi(token) {
     const[logged, setLogged] = useState(false);
     const[admin, setAdmin] = useState(false);
+    const[userData, setUserData] = useState([]);
 
     useEffect(() =>{
         if(token) {
@@ -16,7 +17,7 @@ function UserApi(token) {
                     setLogged(true);
                     user.data.cargo ==='admin' ? setAdmin(true) : setAdmin(false);
                 } catch (error) {
-                    toast.error(error.response.msg);
+                    toast.error(error.response.message);
                 }
             }
             getUser();
@@ -24,8 +25,10 @@ function UserApi(token) {
     }, [token]);
 
     return {
+        userData:[userData,setUserData],
         logged:[logged,setLogged],
         admin:[admin, setAdmin]
+
     }
 
 }

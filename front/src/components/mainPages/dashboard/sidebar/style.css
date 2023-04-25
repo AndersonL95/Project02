@@ -1,0 +1,78 @@
+.sidebar {
+    height: 100vh;
+    width: 200px;
+    background-color: #333;
+    position: fixed;
+  
+}
+.sideList {
+    height: auto;
+    padding: 0;
+    width: 100%;
+}
+.sideList .listRow {
+    width: 100%;
+    height: 60px;
+    list-style-type: none ;
+    margin: 0%;
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.sideList .listRow:hover {
+    cursor: pointer;
+    background-color: #555;
+}
+.sideList #active {
+    background-color: #555;
+}
+.listRow #icon {
+    flex: 30%;
+    display: grid;
+    place-items: center;
+}
+.listRow #title {
+    flex: 70%;
+}
+.sidebar .userInfor {
+    width: 100%;
+    height: 170px;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.userInfor .userPhotodiv {
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    
+}
+.userPhotodiv #userPhoto {
+    display: flex;
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+
+}
+
+.userInfor #cargo {
+    font-size: 9px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #fff;
+}
+.userInfor #userName {
+    font-size: small;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #fff;
+}
+.userInfor #userEmail {
+    font-size: 9px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #fff;
+}

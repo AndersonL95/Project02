@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react';
+import React ,{useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import toast, {Toaster} from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 
 function Copyright(props) {
@@ -38,17 +38,18 @@ const Login = () => {
 
 
   const handleInputs = e =>{
-    setState({
-      ...state,[e.target.name]: e.target.value,
-    })
+    const {name, value} = e.target
+    setState({...state, [name]: value})
+    
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
       try {
-        await axios.post('/user/registro',{...state})
+        await axios.post('user/login',{...state})
         localStorage.setItem('AccessToken', true)
-      } catch (error) {
-        
+        window.location.href = '/dashboard'
+      }catch (error) {
+        alert(error.response.data.message)
       }
   };
   
@@ -71,7 +72,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <form component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -101,13 +102,13 @@ const Login = () => {
               label="Remember me"
             />
             <Button
-              name = ""
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               
             >
+              Entrar
             </Button>
             <Grid container>
               <Grid item xs>
@@ -121,7 +122,7 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
-          </Box>
+          </form>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
