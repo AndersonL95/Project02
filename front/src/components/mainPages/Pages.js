@@ -11,6 +11,8 @@ import PageLayout from "./dashboard/PageLayout";
 
 
 import { GlobalState } from "../../GlobalState";
+import News from "./noticias/news";
+import Alunos from "./alunos/students";
 
 
 function Pages() {
@@ -27,13 +29,18 @@ function Pages() {
                     <Routes>
                         <Route path="/dashboard" element={admin ? <Dashboard/> : <NotFound/>}/>
                         <Route path="/profile" element={admin ? <Profile/> : <NotFound/>} />
+                        <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
+                        <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
                     </Routes>
                 </PageLayout>
                 :<Routes>
                     <Route path="/login" element={<Login/>} />
                     <Route exact path="/" element={<Home />} />
+                    
                     <Route path="/dashboard" element={admin ? <Dashboard/> : <NotFound/>}/>
                     <Route path="/profile" element={admin ? <Profile/> : <NotFound/>} />
+                    <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
+                    <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
                  </Routes>
             }
                 
