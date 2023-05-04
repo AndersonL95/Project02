@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const NewsSchema = new mongoose.Schema({
+    news_id: {
+        type: String,
+        unique: true,
+        trim: true,
+        required: true
+    },
     titulo:{
         type: String,
         unique: true,

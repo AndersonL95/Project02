@@ -4,7 +4,7 @@ const NewsController = require('../controllers/newsController');
 const authAdmin = require('../utils/authAdmin');
 const auth = require('../utils/auth');
 
-router.post('/create_notice',upload.array("images",5),NewsController.createNews, auth,authAdmin);
-router.get('/noticias', NewsController.getNotice);
+router.post('/create_notice',auth, authAdmin, upload.array("images",5),NewsController.createNews);
+router.get('/noticias',NewsController.getNotice);
 
 module.exports = router
