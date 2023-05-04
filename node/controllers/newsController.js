@@ -44,6 +44,22 @@ const NewsController = {
             console.log(error)
             return res.status(500).json({message: error.message})
         }
+    },
+    updateNews: async (req, res) =>{
+        try{
+            const {titulo, conteudo} = req.body;
+            const images ={
+                data: req.files.map(file => fs.readFileSync(path.join(__dirname, "..", "/picture/" + file.filename))),
+                contentType: 'image/png'
+            }
+            await News.findOneAndUpdate({_id: req.params.id},{
+                titulo, conteudo, images
+            })
+            res.json({message:"Noticia alterada."});
+        }catch(error){
+            console.log(error);
+            return res.status(500).json({message: error.message});
+        }
     }
 }
 module.exports = NewsController;
