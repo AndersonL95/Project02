@@ -1,15 +1,14 @@
-import React,{useContext, useEffect, useState, useCallback} from "react";
+import React,{useContext, useEffect, useState} from "react";
 import './style.css'
 import { SidebarData } from "./sidebarData";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { GlobalState } from "../../../../GlobalState";
 import axios from "axios";
-import Perfil from './perfil.png'
+import Perfil from '../../../../assets/perfil.png'
 
 function Sidebar(){
     
 
-    const params = useParams();
     const state = useContext(GlobalState);
     const[user,setUser] = useState([]);
     const[images,setImages] = useState();
@@ -37,7 +36,7 @@ function Sidebar(){
 
         getUser()
     
-    },[user.length])      
+    },[user.length, token])      
         return(
             <div className="sidebar">
                 <div className="userInfor">

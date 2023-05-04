@@ -3,3 +3,7 @@
     flex-direction: row;
     width: 100%;
 }
+.pageLayout {
+    display: flex;
+    flex-direction: row;
+}

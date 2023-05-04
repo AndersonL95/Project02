@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 function UserApi(token) {
     const[logged, setLogged] = useState(false);
     const[admin, setAdmin] = useState(false);
+    const[userData,setUserData] = useState([]);
 
     useEffect(() =>{
         if(token) {
@@ -13,6 +14,7 @@ function UserApi(token) {
                     const user = await axios.get('/user/infor',{
                         headers: {Authorization: token}
                     })
+                    setUserData(user.data);
                     setLogged(true);
                     user.data.cargo ==='admin' ? setAdmin(true) : setAdmin(false);
                 } catch (error) {
@@ -22,10 +24,11 @@ function UserApi(token) {
             getUser();
         }
     }, [token]);
-
+    
     return {
         logged:[logged,setLogged],
-        admin:[admin, setAdmin]
+        admin:[admin, setAdmin],
+        userData:[userData,setUserData]
     }
 
 }

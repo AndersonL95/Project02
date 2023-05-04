@@ -31,7 +31,8 @@ const Header = () => {
           to='/#cadastrar' 
           className='exit_btn'
         >
-          <a className='logoutTitle'><h7>Dashboard</h7><HomeDash className='icon'/></a>
+          <a className='logoutTitle'>Dashboard</a>
+          <HomeDash className='icon'/>
         </Link>
         <Link 
           to='/' 
@@ -41,8 +42,9 @@ const Header = () => {
           <a 
             className='logoutTitle'
           >
-            <h7>Sair</h7> <LogoutIcon className='icon'/>
+            Sair 
           </a>
+          <LogoutIcon className='icon'/>
         </Link>
       </>
       
@@ -61,9 +63,9 @@ const Header = () => {
               to='/login'
             >
               <a  className='logoutTitle'> 
-              <h7>{'Login'}</h7>
-                <LockOpenIcon className='icon' />
+              {'Login'}
               </a>
+              <LockOpenIcon className='icon' />
           </Link>
         }
 

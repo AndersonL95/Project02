@@ -5,7 +5,7 @@ const authAdmin = async (req, res, next) => {
         const user = await Users.findOne({
             _id: req.user.id
         })
-        if(user.cargo === 0)return res.status(401).json({message: "Acesso negado! Recursos de administração."});
+        if(user.cargo === 'user')return res.status(401).json({message: "Acesso negado! Recursos de administração."});
         
         next();
     } catch (err) {

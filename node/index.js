@@ -26,3 +26,4 @@ app.listen(PORT, () =>{
 })
 
 app.use('/user', require('./routes/userRoute'));
+app.use('/news', require('./routes/noticeRoute'));

@@ -80,13 +80,11 @@ const useController ={
     register: async (req, res) => {
         try {
             const {name, email, password, verified} = req.body;
+            const picture ={
+                data: fs.readFileSync(path.join(__dirname, "..", '/picture/' + req.file.filename)),
+                contentType: 'image/png'
+            }
              
-                const picture ={
-                    data: fs.readFileSync(path.join(__dirname, "..", '/picture/users/' + req.file.filename)),
-                    contentType: 'image/png'
-                }
-            
-
             const user = await Users.findOne({email})
             if(user) return res.status(400).json({message: "Esse email já existe."})
             
@@ -95,7 +93,7 @@ const useController ={
 
             const passwordHash = await bcrypt.hash(password, 10);
             const newUser = new Users({
-                name, email, picture,verified: false, password: passwordHash
+                name, email, picture,verified:false, password: passwordHash
             });
             await newUser.save()
                 .then((result) =>{
@@ -237,10 +235,13 @@ const useController ={
     UpdateUser: async (req, res) => {
         try {
             const {_id, name, email} = req.body;
-            const {picture} = req.file.path
+            const picture ={
+                data: fs.readFileSync(path.join(__dirname, "..", `/picture/` + req.file.filename)),
+                contentType: 'image/png'
+            }
             
             await  Users.findByIdAndUpdate({_id: req.params.id},{
-                _id, name, email, picture: req.file.path
+                _id, name, email, picture
             });
            
             
