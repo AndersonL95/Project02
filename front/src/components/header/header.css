@@ -44,7 +44,7 @@
 
 @media screen and (max-width: 700px) {
     .exit_btn .logoutTitle {
-        display: block;
+        display: none;
     }
     .logoutTitle .icon {
         display: block;

@@ -20,8 +20,7 @@ const NewsSchema = new mongoose.Schema({
     images: {
         data: Buffer,
         contentType: String,
-        type: Array,
-        default: []
+        type: Array
         
         
     }

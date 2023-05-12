@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import { GlobalState } from "../../../../GlobalState";
 import axios from "axios";
 import Perfil from '../../../../assets/perfil.png'
+import SubMenu from "./subMenu";
+
 
 function Sidebar(){
     
@@ -12,6 +14,7 @@ function Sidebar(){
     const state = useContext(GlobalState);
     const[user,setUser] = useState([]);
     const[images,setImages] = useState();
+    const[subNav,setSubNava] = useState(false);
     const [token] = state.token
       
     useEffect(() =>{
@@ -25,6 +28,7 @@ function Sidebar(){
                  const blob = new Blob([Int8Array.from(user.picture.data.data)], {type: user.picture.contentType})
                  const image =  window.URL.createObjectURL(blob)
                  setImages(image)   
+                 //console.log(images) 
                  
                  
             } catch (error) {
@@ -36,7 +40,8 @@ function Sidebar(){
 
         getUser()
     
-    },[user.length, token])      
+    },[user.length, token])     
+    
         return(
             <div className="sidebar">
                 <div className="userInfor">
@@ -47,7 +52,19 @@ function Sidebar(){
                     <h2 id="userName">{user.name}</h2>
                     <h3 id="userEmail">{user.email}</h3>
                 </div>
-                <ul className="sideList">
+               <div>
+                {
+                    SidebarData.map((item, i) =>{
+                        return <SubMenu item={item} key={i}/>
+                    })
+                }
+               </div>
+                
+            </div>
+        )
+    }
+    export default Sidebar;
+    /** <ul className="sideList">
                     {
                         SidebarData.map((val, i) =>{
                             return(
@@ -66,16 +83,11 @@ function Sidebar(){
                                     >
                                         <a id="icon">{val.icon}</a>
                                         <a id="title">{val.title}</a>
+                                        
                                     </NavLink>
                                     
                                 </li>
                             )
                         })
                     }
-                </ul>
-                
-            </div>
-        )
-    }
-    export default Sidebar;
-    
+                </ul> */

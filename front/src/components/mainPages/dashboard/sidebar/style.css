@@ -9,37 +9,75 @@
     padding: 0;
     width: 100%;
 }
-.sideList #linkList:hover {
-    cursor: pointer;
-    background-color: #555;
+#sidebarLink {
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    text-decoration: none;
+    font-size: 18px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+        
+    
 }
-.sideList #active {
-    background-color: #555;
-}
-#linkList {
+#listLink {
     text-decoration: none;
     width: 100%;
     height: 60px;
     list-style-type: none ;
     margin: 0%;
     display: flex;
-    flex-direction: row;
     color: #fff;
     justify-content: center;
     align-items: center;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
 }
-#linkList #icon {
+#listLink #icon {
     flex: 30%;
     display: grid;
     place-items: center;
 }
-#linkList #title {
+#listLink #title {
     flex: 70%;
 }
+
+#dropdownLink {
+    height: 60px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#dropdownLink #title {
+    flex: 70%;
+}
+#dropdownLink #icon {
+    flex: 30%;
+    display: grid;
+    place-items: center;
+}
+.subDrop {
+    display: flex;
+    flex-direction: column;
+}
+#listLink:hover {
+    cursor: pointer;
+    background-color: #555;
+}
+.sideList #active {
+    background-color: #555;
+}
+
 .active {
     background-color: #555;
 }
+
 .sidebar .userInfor {
     width: 100%;
     height: 170px;
@@ -81,15 +119,31 @@
     color: #fff;
 }
 
+/*-----------------------------------*/
+
+
+
+
+
+
 @media screen and (max-width:700px){
     .sidebar {
         width:60px;
     }   
-    #linkList #title  {
+    #listLink #title  {
         display: none;
     }
     .sidebar .userInfor {
         height: 70px;
+    }
+    #dropdownLink {
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #dropdownLink #title {
+        display: none;
     }
     .userInfor .userPhotodiv {
         border-radius: 100%;

@@ -23,8 +23,9 @@ function Profile() {
     const getImages = async () =>{
     const blob = new Blob([Int8Array.from(image.data.data)],{type: image.contentType});
     const image64 = window.URL.createObjectURL(blob);
-    console.log(image64);
+   
     setImage(image64);
+    console.log(image64);
     }
     getImages();
     

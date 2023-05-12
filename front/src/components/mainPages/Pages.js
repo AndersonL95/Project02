@@ -6,13 +6,13 @@ import Dashboard from "./dashboard/dashboard";
 import NotFound from "./home/NotFound";
 import Profile from "./dashboard/profile/profile";
 import PageLayout from "./dashboard/PageLayout";
-
+import News from "./dashboard/noticias/news";
+import Alunos from "./alunos/students";
 
 
 
 import { GlobalState } from "../../GlobalState";
-import News from "./noticias/news";
-import Alunos from "./alunos/students";
+
 
 
 function Pages() {
