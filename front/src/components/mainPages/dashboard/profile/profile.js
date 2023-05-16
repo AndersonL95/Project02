@@ -11,7 +11,6 @@ function Profile() {
   const state = useContext(GlobalState);
   const[user] = state.userApi.userData;
   const[token] = state.token;
-  const navigate = useNavigate();
   const[image,setImage] = useState(user.picture);
   const[newImage, setNewImage] = useState()
   const [Data, setData] = useState({
@@ -25,7 +24,6 @@ function Profile() {
     const image64 = window.URL.createObjectURL(blob);
    
     setImage(image64);
-    console.log(image64);
     }
     getImages();
     
@@ -87,6 +85,7 @@ function Profile() {
                 name="pic"
                 onChange={showImage}
                 hidden
+              
               />
                 <AddAPhoto
                 

@@ -12,6 +12,7 @@ import Alunos from "./alunos/students";
 
 
 import { GlobalState } from "../../GlobalState";
+import NewsDetails from "./dashboard/noticias/newsDetails";
 
 
 
@@ -31,6 +32,10 @@ function Pages() {
                         <Route path="/profile" element={admin ? <Profile/> : <NotFound/>} />
                         <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
                         <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
+                        <Route path="/noticia_detalhes_admin/" element={admin ? <NewsDetails/> : <NotFound/>}>
+                            <Route path=":id" element={admin ? <NewsDetails/> : <NotFound/>} />
+                        </Route>
+                        
                     </Routes>
                 </PageLayout>
                 :<Routes>

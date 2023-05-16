@@ -3,7 +3,6 @@ import './style.css';
 import NewsIcon from '@mui/icons-material/NewReleases';
 import {GlobalState} from '../../../../GlobalState';
 import NewsItems from './newsItems';
-import { Link } from 'react-router-dom';
 
 function News() {
   const state = useContext(GlobalState);
@@ -11,7 +10,6 @@ function News() {
   const[admin] = state.userApi.admin;
   const[token] = state.token;
   
-
   return (
     <div className='news_body'>
       <div className='card_title'>
@@ -20,13 +18,16 @@ function News() {
           </div>
             <a>Noticias</a>
         </div>
-        <Link className='notices'>
+        <div
+          
+          className='notices'>
               {
                 notices.map(notice =>{
-                  return <NewsItems key={notice._id} notices={notice}/>
+                  return <NewsItems key={notice._id} notices={notice} token={token}/>
+                     
                 })
               }
-          </Link>
+          </div>
     </div>
   )
 }

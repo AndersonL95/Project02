@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function NewsItems({notices, admin}) {
   const[images,setImages] = useState(notices.images)
@@ -14,16 +15,23 @@ function NewsItems({notices, admin}) {
     
   },[images[0].length]);
 
-  console.log(image);
   
   return (
     <div className='card'>
-     <img src={`data:image/png;base64,${images[0].data[0]}`} className='cover' />
-            
-       
-      <div className='card_notice'>
-        <h2 title={notices.titulo}>{notices.titulo}</h2>
-      </div>
+      <Link
+        className='card_link'
+        to={`/noticia_detalhes_admin/${notices._id}`}
+      >
+        <img src={`data:image/png;base64,${images[0].data[0]}`} className='cover' />
+        <div className='card_notice'>
+          <h2 title={notices.titulo}>{notices.titulo}</h2>
+        </div>
+        <div className='news_id'>
+          <p>{notices.news_id}</p>
+        </div>
+      </Link>
+                      
+     
     </div>
   )
 }
