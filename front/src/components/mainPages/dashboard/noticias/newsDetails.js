@@ -14,11 +14,20 @@ function NewsDetails() {
   const[newsDetails,setNewsDetails] = useState([]);
   const[newImage,setNewImage] = useState()
   const[images,setImages] = useState()
+  const[img,setImg] = useState()
+  const reader = new FileReader();
 
-  const showImage = async (e,i) =>{
-    setImages(e.target.files[i]);
-    setNewImage(e.target.files[i]);
-    console.log(images)
+
+  const showImage = async (e) =>{
+    //setImages(e.target.files[i]);
+    /*for(let i = 0; i < e.target.files.length; i++){
+      setNewImage(URL.createObjectURL(e.target.files[i])); 
+      //setNewImage(e.target.files[i])
+    }*/
+    if(e.target.files){
+      setNewImage(e.target.files)
+    }
+    //console.log(Array.from(newImage).forEach(file =>{console.log(file)}))
   }
     
     useEffect(() =>{
@@ -37,7 +46,7 @@ function NewsDetails() {
       getImages()
     },[newsDetails.length])
 
-
+    //console.log(images)
 
     const deleteNews = async () =>{
       try {
@@ -70,22 +79,34 @@ function NewsDetails() {
         <div className='card_footer'>
         <div className='newsPictures'>
           {
-             images == null 
-             ? "" 
-             : images.map(image => {
-                return image.data.map((img, i)=>{
-                  //console.log(`IMAGES:${i}, ${img}`)
-                  return (
-                    <div>
-                      <img 
-                        src={`data:image/png;base64,${img}`} 
-                        key={i} 
-                        className='imgArr'
-                      />
-                    </div>
-                    
-                  )})
-              })
+            newImage == null
+            ?  images == null 
+            ? "" 
+            : images.map(image => {
+               return image.data.map((img, i)=>{
+                 //console.log(`IMAGES:${i}, ${img}`)
+                 return (
+                   <div>
+                     <img 
+                       src={`data:image/png;base64,${img}`} 
+                       key={i} 
+                       className='imgArr'
+                     />
+                   </div>
+                   
+                 )})
+             })
+             : Array.from(newImage).map((file,i) =>{
+              const img64 = URL.createObjectURL(file)
+              //console.log(`Nº ${i} IMAGE: ${img64}`)
+              return (
+                <img src={img64} key={i} className='imgArr'/>
+              )
+                
+             }) 
+             
+            
+            
           }
         </div>
         <label htmlFor='images' placeholder='upload images'>
@@ -93,7 +114,7 @@ function NewsDetails() {
             type='file'
             id="images"
             name="images"
-            
+            multiple
             onChange={showImage}
             hidden
           />

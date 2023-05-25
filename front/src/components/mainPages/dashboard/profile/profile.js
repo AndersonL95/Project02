@@ -12,7 +12,7 @@ function Profile() {
   const[user] = state.userApi.userData;
   const[token] = state.token;
   const[image,setImage] = useState(user.picture);
-  const[newImage, setNewImage] = useState()
+  const[newImage, setNewImage] = useState([])
   const [Data, setData] = useState({
     name:user.name,
   });
@@ -32,7 +32,8 @@ function Profile() {
   const showImage = async (e) =>{
   setImage(URL.createObjectURL(e.target.files[0]));
   setNewImage(e.target.files[0]);
-  console.log(newImage)
+  //console.log(newImage)
+  console.log(image)
 
   
   };
