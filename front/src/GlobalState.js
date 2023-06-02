@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react';
+import {createContext, useState, useEffect} from 'react';
 import UserApi from './api/userApi';
 import NewsApi from './api/NewsApi';
 import axios from 'axios';
@@ -12,7 +12,7 @@ export const DataProvider = ({children}) =>{
         const AccessToken = localStorage.getItem('AccessToken');
         if(AccessToken){
             const refreshToken = async () =>{
-                const refresh = await axios.get('user/refresh_token');
+                const refresh = await axios.get('/user/refresh_token');
                 setToken(refresh.data.projectToken)
                 setTimeout(() =>{
                     refreshToken()

@@ -20,7 +20,7 @@ function Sidebar(){
     useEffect(() =>{
         const getUser = async () =>{
             try {
-                await axios.get('user/infor',{
+                await axios.get('/user/infor',{
                     headers: {Authorization: token}
                  }).then(response =>{
                     return setUser(response.data)

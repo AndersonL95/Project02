@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import {Routes, Route, useLocation} from 'react-router-dom'
+import  { useContext } from "react";
+import {Routes, Route} from 'react-router-dom'
 import Login from "./auth/login";
 import Home from './home/home';
 import Dashboard from "./dashboard/dashboard";
@@ -32,9 +32,9 @@ function Pages() {
                         <Route path="/profile" element={admin ? <Profile/> : <NotFound/>} />
                         <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
                         <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
-                        <Route path="/noticia_detalhes_admin/" element={admin ? <NewsDetails/> : <NotFound/>}>
-                            <Route path=":id" element={admin ? <NewsDetails/> : <NotFound/>} />
-                        </Route>
+                        <Route path="/news_main/noticia_detalhes_admin/:id" element={admin ? <NewsDetails/> : <NotFound/>}/>
+                           
+                        
                         
                     </Routes>
                 </PageLayout>
@@ -46,6 +46,7 @@ function Pages() {
                     <Route path="/profile" element={admin ? <Profile/> : <NotFound/>} />
                     <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
                     <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
+                    <Route path="/noticia_detalhes_admin/:id" element={admin ? <NewsDetails/> : <NotFound/>}/>
                  </Routes>
             }
                 

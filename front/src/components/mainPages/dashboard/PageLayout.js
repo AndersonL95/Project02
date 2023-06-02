@@ -10,10 +10,10 @@ const PageLayout = ({children}) =>{
     return(
         
         <Grid container className='pageLayout'>
-            <Grid item lg={2} md={3} sm={4} xs={3}>
+            <Grid item lg={2} md={3} sm={3} xs={2}>
                 <SideBar/>
             </Grid>
-        <Grid item md={9} sm={5} xs={7}>
+        <Grid item lg={10} md={9} sm={9} xs={10}>
             {children}
         </Grid>
         

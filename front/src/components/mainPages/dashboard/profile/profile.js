@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import './style.css';
 import { GlobalState } from '../../../../GlobalState';
 import Perfil from '../../../../assets/perfil.png';
@@ -47,7 +46,7 @@ function Profile() {
   const handleSubmit = async(e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append('pic', newImage)
+    formData.append('user', newImage)
     formData.append('name',Data.name)
     try{
       await axios.put(`user/edit/${user._id}`,formData,{
@@ -79,11 +78,11 @@ function Profile() {
             alt='userPhoto'
           />
           <div className='btn_upload'>
-            <label htmlFor='pic'>
+            <label htmlFor='user'>
               <input
                 type='file'
-                id="pic"
-                name="pic"
+                id="user"
+                name="user"
                 onChange={showImage}
                 hidden
               
@@ -109,7 +108,7 @@ function Profile() {
           </div>
           <button 
             className='edit_btn'
-            type='submite'
+            type='submit'
           >
             Editar
           </button>

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { array } = require('../config/configMulter');
 
 const NewsSchema = new mongoose.Schema({
     news_id: {
@@ -18,10 +19,10 @@ const NewsSchema = new mongoose.Schema({
         required: true,
     },
     images: {
+        type: Array,  
         data: Buffer,
-        contentType: String,   
-        stype: Array
-        
+        contentType: String,
+             
         
     }
 }, {
