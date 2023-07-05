@@ -8,11 +8,10 @@ import Profile from "./dashboard/profile/profile";
 import PageLayout from "./dashboard/PageLayout";
 import News from "./dashboard/noticias/news";
 import Alunos from "./alunos/students";
-
-
-
 import { GlobalState } from "../../GlobalState";
 import NewsDetails from "./dashboard/noticias/newsDetails";
+import NewsDetailsCommom from "./dashboard/noticias/newsDetailsCommom";
+import ListUsuarios from "./dashboard/usuarios/listUsuarios";
 
 
 
@@ -33,7 +32,7 @@ function Pages() {
                         <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
                         <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
                         <Route path="/news_main/noticia_detalhes_admin/:id" element={admin ? <NewsDetails/> : <NotFound/>}/>
-                           
+                        <Route path="/usuarios"  element={admin ? <ListUsuarios/> : <NotFound/>}/>
                         
                         
                     </Routes>
@@ -47,6 +46,10 @@ function Pages() {
                     <Route path="/news_main" element={admin ? <News/> : <NotFound/>} />
                     <Route path="/aluno" element={admin ? <Alunos/> : <NotFound/>} />
                     <Route path="/noticia_detalhes_admin/:id" element={admin ? <NewsDetails/> : <NotFound/>}/>
+                    <Route path="/noticia_detalhes/:id" element={<NewsDetailsCommom/>}/>
+                    <Route path="/usuarios"  element={admin ? <ListUsuarios/> : <NotFound/>}/>
+
+
                  </Routes>
             }
                 

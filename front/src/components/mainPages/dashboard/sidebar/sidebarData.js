@@ -6,6 +6,9 @@ import AddUser from '@mui/icons-material/Person3';
 import NoteAdd from'@mui/icons-material/NoteAdd';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import AddIcon from '@mui/icons-material/Add';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+
 
 
 
@@ -20,6 +23,20 @@ export const SidebarData = [
         title:"Meu usuario",
         path: "/profile",
         icon: <Person/>
+    },
+    {
+        title:"Usuarios",
+        path: "/usuarios",
+        icon: <FormatListBulletedIcon/>,
+        iconClosed:<ArrowDropUpIcon/>,
+        iconOpened: <ArrowDropDownIcon/>,
+        subNav: [
+            {
+                title:"Criar usuarios",
+                path:"/",
+                icon:<AddIcon/>
+            }
+        ]
     },
     {
         title:"Noticias",
@@ -40,5 +57,6 @@ export const SidebarData = [
         path: "/aluno",
         icon: <AddUser/>
     },
+    
     
 ]

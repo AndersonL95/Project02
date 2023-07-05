@@ -79,7 +79,7 @@ const path = require('path');
 const useController ={
     register: async (req, res) => {
         try {
-            const {name, email, password, verified} = req.body;
+            const {name, email, password} = req.body;
             const picture ={
                 data: fs.readFileSync(path.join(__dirname, "..", '/picture/' + req.file.filename)),
                 contentType: 'image/png'
@@ -148,8 +148,9 @@ const useController ={
                     bcrypt.compare(uniqueString, hashedUniqueString)
                         .then(result => {
                             if(result ) {
-                                Users.updateOne({id: _id}, {verified: true})
+                                Users.updateMany({id: _id}, {verified: true})
                                     .then(() => {
+
                                         UserVerification.deleteOne({_id})
                                             .then(() =>{
                                                 res.sendFile(path.join(__dirname, "../views/verified.html"));

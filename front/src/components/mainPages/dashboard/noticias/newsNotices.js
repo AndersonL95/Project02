@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-function NewsItems({notices}) {
+
+function NewsNotices({notices}) {
   const[images,setImages] = useState(notices.images)
   const [image, setImage] = useState()
   useEffect(() =>{
@@ -20,7 +21,7 @@ function NewsItems({notices}) {
     <div className='card'>
       <Link
         className='card_link'
-        to={`noticia_detalhes_admin/${notices._id}`}
+        to={`noticia_detalhes/${notices._id}`}
       >
         <img 
           src={`data:image/png;base64,${images[0].data[0]}`} 
@@ -40,4 +41,4 @@ function NewsItems({notices}) {
   )
 }
 
-export default NewsItems
+export default NewsNotices

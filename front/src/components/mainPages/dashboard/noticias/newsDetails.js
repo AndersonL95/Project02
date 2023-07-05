@@ -131,14 +131,28 @@ function NewsDetails() {
         alert("É necessário alterar a imagem.")
       }
     }
+    const deleteNotice = async () =>{
+      try {
+        const res = await axios.delete(`/news/noticias/${newsDetails._id}`,{
+          headers: {Authorization: token}
+        })
+        alert(res.data.message)
+        window.location.href = '/dashboard'
+
+      }
+      catch(error) {
+        alert(error.response.data.message)
+      }
+    }
   //console.log(Data)
   return (
     <div className='newsDetails_body'>
-      <form 
+      <div
         className='cardBody_notice'
         onSubmit={handleSubmit}
         encType='multipart/form-data' method='put'
       >
+        <form className='form_body'>
         <div className='newsTitle'>
           <input
             type='text'
@@ -226,12 +240,12 @@ function NewsDetails() {
             />
            </label>
           </div>
-          <button 
-            
+          <a 
             className='delIcon' 
+            onClick={deleteNotice}
           >
-            <Delete />
-          </button>
+            <Delete/>
+          </a>
           <button 
             type='submit'
             className='updateIcon' 
@@ -239,7 +253,8 @@ function NewsDetails() {
             <Update />
           </button>
         </div>
-      </form>
+        </form>
+      </div>
        </div>
     
   )

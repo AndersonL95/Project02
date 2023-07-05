@@ -1,0 +1,21 @@
+.userBody {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user_cardBody {
+    width: 90%;
+    height: 100vh;
+    margin-top: 50px;
+    border: 1px solid #777;
+    box-shadow: 5px 5px 5px 5px #777;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
