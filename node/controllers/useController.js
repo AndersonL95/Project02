@@ -196,23 +196,30 @@ const useController ={
             const {email, password} = req.body;
     
             const user = await Users.find({email})
-            if(!user) return res.status(400).json({message: "Usuario não existe!"});
+            if(!user[0]) return res.status(400).json({message: "Usuario não existe!"});
                 if(user.length) {
                     if(!user[0].verified) {
                         return res.status(400).json({message: "O e-mail ainda não foi verificado. Verifique sua caixa de entrada."})
                     } else {
-                        const isMatch =  bcrypt.compare(password, user[0].password);
-                        if(!isMatch) return res.status(400).json({message: "Senha incorreta."});
-        
-                        const projectToken = createAccessToken({id: user[0]._id});
-                        const refreshToken = createRefreshToken({id: user[0]._id});
-        
-                        res.cookie('refreshToken', refreshToken, {
-                            httpOnly: true,
-                            path: '/user/refresh_token',
-                            maxAge: 7*24*60*1000
+                        bcrypt.compare(password, user[0].password)
+                        .then((result) =>{
+                            if(result){
+                                const projectToken = createAccessToken({id: user[0]._id});
+                                const refreshToken = createRefreshToken({id: user[0]._id});
+                
+                                res.cookie('refreshToken', refreshToken, {
+                                    httpOnly: true,
+                                    path: '/user/refresh_token',
+                                    maxAge: 7*24*60*1000
+                                })
+                                res.json({projectToken});
+                            }else {
+                                return res.status(400).json({message: "Senha incorreta."});
+                            }
                         })
-                        res.json({projectToken});
+                
+        
+                       
                     }
                    
                     
