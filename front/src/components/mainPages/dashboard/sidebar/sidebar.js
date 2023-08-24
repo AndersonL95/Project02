@@ -23,6 +23,7 @@ function Sidebar(){
                 await axios.get('/user/infor',{
                     headers: {Authorization: token}
                  }).then(response =>{
+                    console.log(response.data)
                     return setUser(response.data)
                  })
                  const blob = new Blob([Int8Array.from(user.picture.data.data)], {type: user.picture.contentType})

@@ -83,7 +83,7 @@ const useController ={
             const picture ={
                 data: fs.readFileSync(path.join(__dirname, "..", '/picture/' + req.file.filename)),
                 contentType: 'image/png'
-            }
+            } 
              
             const user = await Users.findOne({email})
             if(user) return res.status(400).json({message: "Esse email já existe."})
@@ -196,6 +196,7 @@ const useController ={
             const {email, password} = req.body;
     
             const user = await Users.find({email})
+
             if(!user[0]) return res.status(400).json({message: "Usuario não existe!"});
                 if(user.length) {
                     if(!user[0].verified) {
@@ -206,13 +207,13 @@ const useController ={
                             if(result){
                                 const projectToken = createAccessToken({id: user[0]._id});
                                 const refreshToken = createRefreshToken({id: user[0]._id});
-                
+                                const cargo = user[0].cargo
                                 res.cookie('refreshToken', refreshToken, {
                                     httpOnly: true,
                                     path: '/user/refresh_token',
                                     maxAge: 7*24*60*1000
                                 })
-                                res.json({projectToken});
+                                res.json({cargo, projectToken});
                             }else {
                                 return res.status(400).json({message: "Senha incorreta."});
                             }
@@ -245,7 +246,7 @@ const useController ={
             const {_id, name, email} = req.body;
             const picture ={
                 data: fs.readFileSync(path.join(__dirname, "..", `/picture/` + req.file.filename)),
-                contentType: 'image/png'
+                contentType: 'image/png',
             }
             
             await  Users.findByIdAndUpdate({_id: req.params.id},{
@@ -268,7 +269,7 @@ const useController ={
         body('newPassword').isLength({min: 6}).withMessage('A senha precisa ter 6 digitos ou mais.')
     ],
     updatePassword: async (req, res) => {
-        const { atual, newPassword, _id } = req.body;
+        const { atual, newPassword } = req.body;
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
             return res.status(400).json({errors: errors.array()});
@@ -405,7 +406,6 @@ const useController ={
         try {
             const user = await Users.findById(req.user.id).select('-password');
             if(!user) return res.status(400).json({message: "Usuario não existe!"});
-
             res.json(user)
         } catch (err) {
             console.log(err);
